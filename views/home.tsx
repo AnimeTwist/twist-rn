@@ -20,12 +20,17 @@ class Home extends React.Component<any, any> {
     header: null
   };
 
+  constructor(props: any) {
+    super(props);
+    this.fetchList();
+  }
+
   public state = {
     animeList: [],
     search: ""
   };
 
-  public async componentDidMount() {
+  public fetchList = async () => {
     try {
       const animeList = await API.load();
       this.setState({ animeList });
@@ -35,7 +40,7 @@ class Home extends React.Component<any, any> {
         console.error(error);
       }
     }
-  }
+  };
 
   public avatarIconPress = () => {
     return this.props.navigation.navigate("Profile");

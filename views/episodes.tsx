@@ -17,12 +17,17 @@ export default class Episodes extends React.Component<any, any> {
     headerTransparent: true
   };
 
+  constructor(props: any) {
+    super(props);
+    this.fetchEpisodeList();
+  }
+
   public state = {
     episodeList: [],
     currentEpisode: null
   };
 
-  public async componentDidMount() {
+  public fetchEpisodeList = async () => {
     const { navigation } = this.props;
     const id = navigation.getParam("id", 0);
     try {
@@ -34,7 +39,7 @@ export default class Episodes extends React.Component<any, any> {
         console.error(error);
       }
     }
-  }
+  };
 
   public changeEpisode = async (episode: any) => {
     try {
