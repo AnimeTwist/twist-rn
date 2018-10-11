@@ -17,35 +17,12 @@ interface IAnimeItem {
 
 class Home extends React.Component<any, any> {
   private static navigationOptions = {
-    headerStyle: {
-      backgroundColor: bg,
-      borderBottomColor: elBg
-    },
-    headerTitle: (
-      <SearchBar
-        containerStyle={{
-          backgroundColor: "transparent",
-          borderColor: "transparent",
-          borderTopColor: "transparent",
-          borderTopWidth: 0,
-          borderBottomWidth: 0,
-          flex: 1
-        }}
-        inputStyle={{
-          backgroundColor: accent
-        }}
-        style={{ color: "white" }}
-        placeholderTextColor={"rgba(255,255,255,.5)"}
-        noIcon
-        onChangeText={this.handleSearch}
-        onClear={this.handleSearchClear}
-        placeholder="Search anime"
-      />
-    )
+    header: null
   };
 
   public state = {
-    animeList: []
+    animeList: [],
+    search: ""
   };
 
   public async componentDidMount() {
@@ -71,13 +48,36 @@ class Home extends React.Component<any, any> {
     });
   };
 
+  public handleSearch = async () => {};
+
+  public handleSearchClear = () => this.setState({ search: "" });
+
   public render() {
-    const { animeList } = this.state;
+    const { animeList, search } = this.state;
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.viewAppleBar}>
             <View style={styles.viewAppleBarContent}>
+              <SearchBar
+                containerStyle={{
+                  backgroundColor: "transparent",
+                  borderColor: "transparent",
+                  borderTopColor: "transparent",
+                  borderTopWidth: 0,
+                  borderBottomWidth: 0,
+                  flex: 1
+                }}
+                inputStyle={{
+                  backgroundColor: accent
+                }}
+                style={{ color: "white" }}
+                placeholderTextColor={"rgba(255,255,255,.5)"}
+                onChangeText={this.handleSearch}
+                onClear={this.handleSearchClear}
+                placeholder="Search anime"
+                value={search}
+              />
               <View style={styles.viewAppleBarRow}>
                 <View>
                   <View style={{ opacity: 0.5 }}>
@@ -89,7 +89,7 @@ class Home extends React.Component<any, any> {
                 </View>
                 <View style={{ flex: 1 }} />
                 <Avatar
-                  medium
+                  size="medium"
                   rounded
                   source={{ uri: "https://u.lewd.se/kmKTwu_G2JtWd9.png" }}
                   onPress={this.avatarIconPress}
@@ -115,7 +115,7 @@ Then share it with your friends and family and let them enjoy it too.`}
                 data={animeList.sort((a: any, b: any) =>
                   a.title.localeCompare(b.title)
                 )}
-                renderItem={({ item }) => (
+                renderItem={({ item }: any) => (
                   <ListItem
                     containerStyle={{ borderBottomColor: elBg }}
                     titleStyle={{ color: "white" }}
@@ -123,7 +123,7 @@ Then share it with your friends and family and let them enjoy it too.`}
                     subtitle={item.ongoing ? "Ongoing" : undefined}
                     subtitleStyle={{ color: accent }}
                     onPress={this.openAnime.bind(this, item)}
-                    hideChevron={true}
+                    chevron={false}
                   />
                 )}
               />

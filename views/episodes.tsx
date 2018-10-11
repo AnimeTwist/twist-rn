@@ -79,12 +79,14 @@ export default class Episodes extends React.Component<any, any> {
             {episodeList &&
               episodeList
                 .sort((a: any, b: any) => b.episode - a.episode)
-                .map((item, index) => (
+                .map((item: any, index) => (
                   <Button
                     style={{ width: 64, margin: 2 }}
-                    borderRadius={8}
-                    backgroundColor={elBg}
-                    textStyle={{ fontWeight: "500" }}
+                    containerStyle={{
+                      borderRadius: 8,
+                      backgroundColor: elBg
+                    }}
+                    titleStyle={{ fontWeight: "500" }}
                     key={index}
                     title={item.episode.toString()}
                     onPress={this.changeEpisode.bind(this, item)}
