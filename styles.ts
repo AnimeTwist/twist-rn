@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { iOSUIKit } from "react-native-typography";
 
 export const accent: string = "#e53232";
 export const bg: string = "#1c1f22";
@@ -8,29 +7,29 @@ export const elBg: string = "rgba(255, 255, 255, .05)";
 export default StyleSheet.create({
   safeAreaView: {
     flex: 1,
-    backgroundColor: bg,
+    backgroundColor: bg
   },
   scrollView: {
-    flex: 1,
+    flex: 1
   },
   safeAreaViewBlack: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "black"
   },
   scrollViewNotBlack: {
     flex: 1,
-    backgroundColor: bg,
+    backgroundColor: bg
   },
   viewAppleBar: {
-    padding: 16,
+    padding: 16
   },
   viewAppleBarContent: {
     paddingBottom: 8,
     borderBottomWidth: 1,
-    borderBottomColor: elBg,
+    borderBottomColor: elBg
   },
   viewAppleBarRow: {
-    flexDirection: "row",
+    flexDirection: "row"
   },
   viewMotd: {
     margin: 16,
@@ -40,15 +39,17 @@ export default StyleSheet.create({
     shadowRadius: 6,
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 4
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.1
   },
   viewAnimeList: {
-    paddingTop: 16,
+    paddingTop: 16
   },
   viewEpisodeList: {
     flex: 1,
-    width: "100%",
-  },
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center"
+  }
 });

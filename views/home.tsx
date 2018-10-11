@@ -14,11 +14,12 @@ interface IAnimeItem {
   title: string;
   kitsu: number;
 }
+
 class Home extends React.Component<any, any> {
   private static navigationOptions = {
     headerStyle: {
       backgroundColor: bg,
-      borderBottomColor: elBg,
+      borderBottomColor: elBg
     },
     headerTitle: (
       <SearchBar
@@ -28,10 +29,10 @@ class Home extends React.Component<any, any> {
           borderTopColor: "transparent",
           borderTopWidth: 0,
           borderBottomWidth: 0,
-          flex: 1,
+          flex: 1
         }}
         inputStyle={{
-          backgroundColor: accent,
+          backgroundColor: accent
         }}
         style={{ color: "white" }}
         placeholderTextColor={"rgba(255,255,255,.5)"}
@@ -40,11 +41,11 @@ class Home extends React.Component<any, any> {
         onClear={this.handleSearchClear}
         placeholder="Search anime"
       />
-    ),
+    )
   };
 
   public state = {
-    animeList: [],
+    animeList: []
   };
 
   public async componentDidMount() {
@@ -61,14 +62,15 @@ class Home extends React.Component<any, any> {
 
   public avatarIconPress = () => {
     return this.props.navigation.navigate("Profile");
-  }
+  };
 
   public openAnime = (anime: IAnimeItem) => {
     return this.props.navigation.navigate("Episodes", {
       title: anime.title,
-      id: anime.kitsu,
+      id: anime.kitsu
     });
-  }
+  };
+
   public render() {
     const { animeList } = this.state;
     return (
@@ -97,11 +99,10 @@ class Home extends React.Component<any, any> {
             </View>
           </View>
           <View style={styles.viewMotd}>
-            <Text style={iOSUIKit.bodyEmphasizedWhite}>SOS! Please help!</Text>
+            <Text style={iOSUIKit.bodyEmphasizedWhite}>15th of July 2018</Text>
             <Text style={iOSUIKit.bodyWhite}>
-              {`😱 PayPal just locked our account and no longer lets us accept donations!
-🆘 So we made a new Patreon account and need all your help to pay for the site
-🔗 Please support us through our new Patreon at: https://goo.gl/j1uoV3`}
+              {`Do you like the quality of our site?
+Then share it with your friends and family and let them enjoy it too.`}
             </Text>
           </View>
           <View style={styles.viewAnimeList}>
@@ -111,12 +112,16 @@ class Home extends React.Component<any, any> {
             {animeList && (
               <FlatList
                 keyExtractor={(item, index) => index.toString()}
-                data={animeList}
+                data={animeList.sort((a: any, b: any) =>
+                  a.title.localeCompare(b.title)
+                )}
                 renderItem={({ item }) => (
                   <ListItem
                     containerStyle={{ borderBottomColor: elBg }}
                     titleStyle={{ color: "white" }}
                     title={item.title}
+                    subtitle={item.ongoing ? "Ongoing" : undefined}
+                    subtitleStyle={{ color: accent }}
                     onPress={this.openAnime.bind(this, item)}
                     hideChevron={true}
                   />
@@ -133,7 +138,7 @@ class Home extends React.Component<any, any> {
 export default createStackNavigator(
   {
     Home,
-    Episodes,
+    Episodes
   },
-  {},
+  {}
 );

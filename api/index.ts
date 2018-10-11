@@ -20,7 +20,7 @@ const load = async (): Promise<Array<[{}]>> => {
         link: element.link,
         mal: element["mal:id"],
         kitsu: element["kitsu:id"],
-        twist: element["animetwist:id"],
+        twist: element["animetwist:id"]
       });
     });
     if (que) {
@@ -48,7 +48,7 @@ const loadEpisodeList = async (id: number): Promise<Array<[{}]>> => {
         link: element.link,
         mal: element["mal:id"],
         kitsu: element["kitsu:id"],
-        twist: element["animetwist:id"],
+        twist: element["animetwist:id"]
       });
     });
     if (que) {
@@ -66,7 +66,7 @@ const loadEpisodeList = async (id: number): Promise<Array<[{}]>> => {
  */
 const Twist = {
   load,
-  loadEpisodeList,
+  loadEpisodeList
 };
 
 export default Twist;

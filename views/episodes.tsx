@@ -1,23 +1,25 @@
 import * as React from "react";
 import { ScrollView, Text, View } from "react-native";
-import { Avatar, Button } from "react-native-elements";
+import { Button } from "react-native-elements";
 import { iOSUIKit } from "react-native-typography";
 import { SafeAreaView } from "react-navigation";
 import API from "../api";
-import styles, { bg, elBg } from "../styles";
+import styles, { elBg } from "../styles";
 import VideoPlayer from "./videoplayer";
 
 export default class Episodes extends React.Component<any, any> {
   private static navigationOptions = {
     headerTitle: null,
     headerStyle: {
-      borderBottomColor: "transparent",
+      borderBottomColor: "transparent"
     },
-    headerTransparent: true,
+    headerLeft: () => null,
+    headerTransparent: true
   };
 
   public state = {
     episodeList: [],
+    currentEpisode: null
   };
 
   public async componentDidMount() {
@@ -25,7 +27,7 @@ export default class Episodes extends React.Component<any, any> {
     const id = navigation.getParam("id", 0);
     try {
       const episodeList = await API.loadEpisodeList(id);
-      this.setState({ episodeList });
+      this.setState({ episodeList }, () => console.log(this.state));
     } catch (error) {
       if (__DEV__) {
         // tslint:disable-next-line:no-console
@@ -33,8 +35,18 @@ export default class Episodes extends React.Component<any, any> {
       }
     }
   }
+
+  public changeEpisode = async (episode: any) => {
+    try {
+      const episode = await fetch(``);
+      return this.setState({ currentEpisode: episode });
+    } catch (error) {
+      return new Error(error);
+    }
+  };
+
   public render() {
-    const { episodeList } = this.state;
+    const { episodeList, currentEpisode } = this.state;
     const { navigation } = this.props;
     const title = navigation.getParam("title", "Episodes");
     return (
@@ -66,8 +78,17 @@ export default class Episodes extends React.Component<any, any> {
           <View style={styles.viewEpisodeList}>
             {episodeList &&
               episodeList
+                .sort((a: any, b: any) => b.episode - a.episode)
                 .map((item, index) => (
-                  <Button key={index} title={item.episode.toString()} />
+                  <Button
+                    style={{ width: 64, margin: 2 }}
+                    borderRadius={8}
+                    backgroundColor={elBg}
+                    textStyle={{ fontWeight: "500" }}
+                    key={index}
+                    title={item.episode.toString()}
+                    onPress={this.changeEpisode.bind(this, item)}
+                  />
                 ))
                 .reverse()}
           </View>

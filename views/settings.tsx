@@ -8,14 +8,15 @@ class Settings extends React.Component<any, any> {
     title: "Settings",
     headerStyle: {
       backgroundColor: bg,
-      borderBottomColor: elBg,
+      borderBottomColor: elBg
     },
     headerTitleStyle: {
-      color: "white",
-    },
+      color: "white"
+    }
   };
 
   public state = {};
+
   public render() {
     return <SafeAreaView style={styles.safeAreaView} />;
   }
@@ -23,7 +24,7 @@ class Settings extends React.Component<any, any> {
 
 export default createStackNavigator(
   {
-    Settings,
+    Settings
   },
-  {},
+  {}
 );

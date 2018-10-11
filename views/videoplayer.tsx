@@ -1,4 +1,4 @@
-import { Video } from "expo";
+import Video from "react-native-video";
 import * as React from "react";
 import { SafeAreaView } from "react-native";
 import { createStackNavigator } from "react-navigation";
@@ -17,12 +17,10 @@ export default class VideoPlayer extends React.Component<IVideoPlayer, any> {
     return (
       <Video
         source={{
-          uri: source,
+          uri: source
         }}
         style={{ height, width, backgroundColor: "black" }}
         resizeMode="contain"
-        shouldPlay
-        useNativeControls
       />
     );
   }

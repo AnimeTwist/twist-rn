@@ -1,19 +1,19 @@
+import Ionicons from "react-native-vector-icons/Ionicons";
 import * as React from "react";
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { StatusBar, View } from "react-native";
 import { createBottomTabNavigator } from "react-navigation";
-import { Ionicons } from "@expo/vector-icons";
-import Home from "./views/home";
+import { bg, elBg } from "./styles";
 import Chat from "./views/chat";
+import Home from "./views/home";
 import Profile from "./views/profile";
 import Settings from "./views/settings";
-import { elBg, bg, accent } from "./styles";
 
 const App = createBottomTabNavigator(
   {
     Home,
     Chat,
     Profile,
-    Settings,
+    Settings
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -41,7 +41,7 @@ const App = createBottomTabNavigator(
             break;
         }
         return <Ionicons name={iconName} size={25} color={tintColor} />;
-      },
+      }
     }),
     tabBarOptions: {
       activeTintColor: "white",
@@ -49,10 +49,13 @@ const App = createBottomTabNavigator(
       activeBackgroundColor: elBg,
       tabStyle: {
         backgroundColor: bg,
-        borderWidth: 0,
+        borderWidth: 0
       },
-    },
-  },
+      style: {
+        backgroundColor: bg
+      }
+    }
+  }
 );
 
 export default () => (
